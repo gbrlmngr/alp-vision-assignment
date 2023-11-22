@@ -1,0 +1,58 @@
+{
+  "name": "@alp-vision-assignment/source",
+  "version": "0.0.0",
+  "license": "UNLICENSED",
+  "author": "Gabriel Mangiurea",
+  "scripts": {
+    "prepare": "husky install",
+    "build:shared": "nx run @alp-vision-assignment/shared:build",
+    "build:api": "nx run @alp-vision-assignment/api:build:dev",
+    "build:ui": "nx run @alp-vision-assignment/ui:build",
+    "build:all": "nx run-many -t build --all",
+    "start:dev:api": "nx run @alp-vision-assignment/api:start:dev",
+    "start:dev:ui": "export PORT=8080 && nx run @alp-vision-assignment/ui:start",
+    "start:dev:all": "run-p -l start:dev:api start:dev:ui",
+    "start:dev": "run-s -l build:shared start:dev:all",
+    "start:api": "nx run @alp-vision-assignment/api:start",
+    "start:ui": "http-server -p 8080 -a 0.0.0.0 ./packages/ui/build",
+    "start:all": "run-p -l start:api start:ui",
+    "test:all": "nx run-many -t test test:e2e --all"
+  },
+  "private": true,
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "eslint": "^8.41.0",
+    "lint-staged": "^13.2.2",
+    "nx": "16.2.2",
+    "prettier": "2.8.8",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "husky": "^8.0.3",
+    "npm-run-all": "^4.1.5"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "lint-staged": {
+    "packages/api/**/*.{js,ts,jsx,tsx}": [
+      "nx run @alp-vision-assignment/api:lint",
+      "nx run @alp-vision-assignment/api:format"
+    ],
+    "packages/api/**/!*.{js,ts,jsx,tsx}": "nx run @alp-vision-assignment/api:format -- --ignore-unknown",
+    "packages/ui/**/*.{js,ts,jsx,tsx}": [
+      "nx run @alp-vision-assignment/ui:lint",
+      "prettier --write"
+    ],
+    "packages/ui/**/!*.{js,ts,jsx,tsx}": "prettier --write --ignore-unknown",
+    "packages/shared/**/*.{js,ts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "packages/shared/**/!*.{js,ts,jsx,tsx}": "prettier --write --ignore-unknown"
+  }
+}

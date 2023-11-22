@@ -1,0 +1,36 @@
+services:
+  postgres:
+    container_name: postgres
+    image: "postgres:alpine"
+    restart: always
+    volumes:
+      - ./pg/data:/var/lib/progresql@alpine/data
+      - ./pg/init.sql:/docker-entrypoint-initdb.d/10-init.sql
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    env_file:
+      - .env.postgres.production.local
+  
+  app:
+    container_name: app
+    depends_on:
+      - postgres
+    restart: always
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    command: npm run start:all
+    ports:
+      - '8080:8080' # UI
+      - '8081:8081' # API
+    expose:
+      - '8080'
+      - '8081'
+    env_file:
+      - .env.app.production.local
+
+volumes:
+  postgres:
+    external: true

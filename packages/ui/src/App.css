@@ -1,0 +1,25 @@
+.meaning-of-life {
+  transition: all 0.3s ease-in;
+
+  --call-to-action-background: #ffeecc;
+  --call-to-action-color: #003345;
+  --error-message-color: "#ffeecc";
+
+  --pre-submmission-background: rgba(255, 255, 0, 1);
+  --successful-submission-background: rgba(0, 128, 0, 0.5);
+  /* --successful-submission-background: hsl(100, 50%, 50%); */
+  --failed-submission-background: #f00001;
+}
+
+.meaning-of-life .container {
+  max-width: 60%;
+}
+
+.meaning-of-life #meaning-of-life-input {
+  resize: vertical;
+  max-height: 30vh;
+}
+
+.meaning-of-life .call-to-action-button:disabled {
+  pointer-events: all;
+}

@@ -1,0 +1,27 @@
+{
+  "forms": {
+    "hints": {
+      "shift-key-to-submit": {
+        "0": "Hint: you can use",
+        "1": "Shift + Enter",
+        "2": "to submit"
+      }
+    },
+    "validation-errors": {
+      "min-1-char": "Field must contain at least 1 character",
+      "max-100-chars": "Field must contain at most 100 characters"
+    }
+  },
+  "meaning-of-life": {
+    "primary-label": {
+      "0": "The",
+      "1": "meaning",
+      "2": "of life:"
+    },
+    "call-to-action": "Submit my text",
+    "saved": "Your meaning has been saved successfully",
+    "errors": {
+      "unable-to-save": "Unable to save meaning (code: {code})"
+    }
+  }
+}
